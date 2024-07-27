@@ -18,6 +18,7 @@ namespace BlogApp.Controllers
             return View(result);
         }
         public IActionResult ArticleDetail(int id) {
+            ViewBag.Id = id;
             var result=_articleService.GetArticleById(id);
             return View(result);
         }

@@ -1,12 +1,21 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Business.Abstract;
+using Microsoft.AspNetCore.Mvc;
 
 namespace BlogApp.Controllers
 {
     public class ArticleController : Controller
     {
-        public IActionResult Index()
+        IArticleService _articleService;
+
+		public ArticleController(IArticleService articleService)
+		{
+			_articleService = articleService;
+		}
+
+		public IActionResult Index()
         {
-            return View();
+            var result=_articleService.GetAll();
+            return View(result);
         }
     }
 }

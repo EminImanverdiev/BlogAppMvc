@@ -13,6 +13,8 @@ namespace BlogApp
         {
             services.AddScoped<ICategoryService, CategoryManager>();
             services.AddScoped<ICategoryDal, EfCategoryDal>();
-        }
+			services.AddScoped<IArticleService, ArticleManager>();
+			services.AddScoped<IArticleDal, EfArticleDal>();
+		}
     }
 }

@@ -14,5 +14,7 @@ namespace Business.Abstract
 		void Update(Article article);
 		List<Article> GetAll();
 		Article GetById(int Id);
+		List<Article> GetArticlesWithCategory();
+		List<Article> GetArticleById(int Id);
 	}
 }

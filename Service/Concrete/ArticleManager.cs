@@ -28,9 +28,19 @@ namespace Business.Concrete
 			return _articleDal.GetAll();	
 		}
 
+		public List<Article> GetArticleById(int Id)
+		{
+			return _articleDal.GetAll(a=>a.ArticleId==Id);
+		}
+
+		public List<Article> GetArticlesWithCategory()
+		{
+			return _articleDal.GetAllWithCategory();
+		}
+
 		public Article GetById(int Id)
 		{
-			throw new NotImplementedException();
+			return _articleDal.Get(a=>a.ArticleId==Id);
 		}
 
 		public void Remove(Article article)

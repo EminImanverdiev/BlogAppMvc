@@ -14,7 +14,11 @@ namespace BlogApp.Controllers
 
 		public IActionResult Index()
         {
-            var result=_articleService.GetAll();
+            var result=_articleService.GetArticlesWithCategory();
+            return View(result);
+        }
+        public IActionResult ArticleDetail(int id) {
+            var result=_articleService.GetArticleById(id);
             return View(result);
         }
     }

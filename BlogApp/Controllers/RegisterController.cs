@@ -1,5 +1,7 @@
 ﻿using Business.Abstract;
+using Business.ValidationRules;
 using Entities.Concrete;
+using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BlogApp.Controllers
@@ -21,10 +23,24 @@ namespace BlogApp.Controllers
 		[HttpPost]
 		public IActionResult Index(Writer writer)
 		{
-			writer.WriterStatus = true;
-			writer.WriterAbout = "Test";
-			_writerService.Add(writer);
-			return RedirectToAction("Index","Article");
+			WriterValidator validator = new WriterValidator();
+			ValidationResult results= validator.Validate(writer);
+            if (results.IsValid)
+            {
+				writer.WriterStatus = true;
+				writer.WriterAbout = "Test";
+				_writerService.Add(writer);
+				return RedirectToAction("Index", "Article");
+			}
+			else
+			{
+                foreach (var item in results.Errors)
+                {
+					ModelState.AddModelError(item.PropertyName,item.ErrorMessage);
+                }
+            }
+			return View();
+            
 		}
 	}
 }

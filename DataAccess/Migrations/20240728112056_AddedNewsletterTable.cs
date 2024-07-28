@@ -2,7 +2,7 @@
 
 namespace DataAccess.Migrations
 {
-    public partial class m3 : Migration
+    public partial class AddedNewsletterTable : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

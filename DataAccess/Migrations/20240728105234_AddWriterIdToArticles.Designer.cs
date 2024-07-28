@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240727121724_m4")]
-    partial class m4
+    [Migration("20240728105234_AddWriterIdToArticles")]
+    partial class AddWriterIdToArticles
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -79,9 +79,14 @@ namespace DataAccess.Migrations
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
+                    b.Property<int>("WriterId")
+                        .HasColumnType("int");
+
                     b.HasKey("ArticleId");
 
                     b.HasIndex("CategoryId");
+
+                    b.HasIndex("WriterId");
 
                     b.ToTable("Articles");
                 });
@@ -207,7 +212,15 @@ namespace DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Entities.Concrete.Writer", "Writer")
+                        .WithMany("Articles")
+                        .HasForeignKey("WriterId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Category");
+
+                    b.Navigation("Writer");
                 });
 
             modelBuilder.Entity("Entities.Concrete.Comment", b =>
@@ -227,6 +240,11 @@ namespace DataAccess.Migrations
                 });
 
             modelBuilder.Entity("Entities.Concrete.Category", b =>
+                {
+                    b.Navigation("Articles");
+                });
+
+            modelBuilder.Entity("Entities.Concrete.Writer", b =>
                 {
                     b.Navigation("Articles");
                 });

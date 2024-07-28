@@ -1,5 +1,7 @@
 ﻿using Business.Abstract;
+using Entities.Concrete;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace BlogApp.Controllers
 {
@@ -16,8 +18,18 @@ namespace BlogApp.Controllers
 		{
 			return View();
 		}
+		[HttpGet]
 		public PartialViewResult PartialAddComment()
 		{
+			return PartialView();
+		}
+		[HttpPost]
+		public PartialViewResult PartialAddComment(Comment comment)
+		{
+			comment.CommentDate = DateTime.Parse(DateTime.UtcNow.ToShortDateString());
+			comment.CommentStatus = true;
+			comment.ArticleId = 3;
+			_commentService.Add(comment);
 			return PartialView();
 		}
 		public PartialViewResult CommentListByBlog(int Id)

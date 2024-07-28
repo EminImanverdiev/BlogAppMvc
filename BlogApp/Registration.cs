@@ -19,6 +19,8 @@ namespace BlogApp
 			services.AddScoped<ICommentDal, EfCommentDal>();
 			services.AddScoped<IWriterService, WriterManager>();
 			services.AddScoped<IWriterDal, EfWriterDal>();
+			services.AddScoped<INewsLetterService, NewsLetterManager>();
+			services.AddScoped<INewsLetterDal, EfNewsLetterDal>();
 		}
     }
 }

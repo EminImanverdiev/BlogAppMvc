@@ -1,4 +1,5 @@
 ﻿using Core.Entities.Abstract;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Entities.Concrete
@@ -13,5 +14,7 @@ namespace Entities.Concrete
         public string WriterEmail { get; set; }
         public string WriterPassword { get; set; }
         public bool WriterStatus { get; set; }
-    }
+		public List<Article> Articles { get; set; }
+
+	}
 }

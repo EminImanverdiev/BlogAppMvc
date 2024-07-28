@@ -2,43 +2,43 @@
 
 namespace DataAccess.Migrations
 {
-    public partial class m2 : Migration
+    public partial class AddWriterIdToArticles : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<int>(
-                name: "CategoryId",
+                name: "WriterId",
                 table: "Articles",
                 type: "int",
                 nullable: false,
                 defaultValue: 0);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Articles_CategoryId",
+                name: "IX_Articles_WriterId",
                 table: "Articles",
-                column: "CategoryId");
+                column: "WriterId");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Articles_Categorys_CategoryId",
+                name: "FK_Articles_Writers_WriterId",
                 table: "Articles",
-                column: "CategoryId",
-                principalTable: "Categorys",
-                principalColumn: "CategoryId",
+                column: "WriterId",
+                principalTable: "Writers",
+                principalColumn: "WriterId",
                 onDelete: ReferentialAction.Cascade);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_Articles_Categorys_CategoryId",
+                name: "FK_Articles_Writers_WriterId",
                 table: "Articles");
 
             migrationBuilder.DropIndex(
-                name: "IX_Articles_CategoryId",
+                name: "IX_Articles_WriterId",
                 table: "Articles");
 
             migrationBuilder.DropColumn(
-                name: "CategoryId",
+                name: "WriterId",
                 table: "Articles");
         }
     }

@@ -33,6 +33,11 @@ namespace Business.Concrete
 			return _articleDal.GetAll(a=>a.ArticleId==Id);
 		}
 
+		public List<Article> GetArticlesByWriter(int Id)
+		{
+			return _articleDal.GetAll(a=>a.WriterId==Id);
+		}
+
 		public List<Article> GetArticlesWithCategory()
 		{
 			return _articleDal.GetAllWithCategory();

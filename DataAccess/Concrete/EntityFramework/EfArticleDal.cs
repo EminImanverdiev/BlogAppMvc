@@ -16,5 +16,4 @@ namespace DataAccess.Concrete.EntityFramework
 			return context.Articles.Include(c => c.Category).ToList();
 		}
 	}
-
 }

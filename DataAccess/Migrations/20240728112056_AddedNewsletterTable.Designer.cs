@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240724072951_m3")]
-    partial class m3
+    [Migration("20240728112056_AddedNewsletterTable")]
+    partial class AddedNewsletterTable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -79,9 +79,14 @@ namespace DataAccess.Migrations
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
+                    b.Property<int>("WriterId")
+                        .HasColumnType("int");
+
                     b.HasKey("ArticleId");
 
                     b.HasIndex("CategoryId");
+
+                    b.HasIndex("WriterId");
 
                     b.ToTable("Articles");
                 });
@@ -114,6 +119,9 @@ namespace DataAccess.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("ArticleId")
+                        .HasColumnType("int");
+
                     b.Property<string>("CommentContent")
                         .HasColumnType("nvarchar(max)");
 
@@ -130,6 +138,8 @@ namespace DataAccess.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("CommentId");
+
+                    b.HasIndex("ArticleId");
 
                     b.ToTable("Comments");
                 });
@@ -202,10 +212,39 @@ namespace DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Entities.Concrete.Writer", "Writer")
+                        .WithMany("Articles")
+                        .HasForeignKey("WriterId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Category");
+
+                    b.Navigation("Writer");
+                });
+
+            modelBuilder.Entity("Entities.Concrete.Comment", b =>
+                {
+                    b.HasOne("Entities.Concrete.Article", "Article")
+                        .WithMany("Comments")
+                        .HasForeignKey("ArticleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Article");
+                });
+
+            modelBuilder.Entity("Entities.Concrete.Article", b =>
+                {
+                    b.Navigation("Comments");
                 });
 
             modelBuilder.Entity("Entities.Concrete.Category", b =>
+                {
+                    b.Navigation("Articles");
+                });
+
+            modelBuilder.Entity("Entities.Concrete.Writer", b =>
                 {
                     b.Navigation("Articles");
                 });

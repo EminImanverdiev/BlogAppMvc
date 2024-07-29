@@ -56,7 +56,7 @@ namespace BlogApp
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Article}/{action=Index}/{id?}");
+                    pattern: "{controller=About}/{action=Index}/{id?}");
             });
         }
     }

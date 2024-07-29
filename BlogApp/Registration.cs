@@ -21,6 +21,10 @@ namespace BlogApp
 			services.AddScoped<IWriterDal, EfWriterDal>();
 			services.AddScoped<INewsLetterService, NewsLetterManager>();
 			services.AddScoped<INewsLetterDal, EfNewsLetterDal>();
+			services.AddScoped<IAboutDal, EfAboutDal>();
+			services.AddScoped<IAboutService, AboutManager>();
+			services.AddScoped<IContactDal, EfContactDal>();
+			services.AddScoped<IContactService, ContactManager>();
 		}
     }
 }

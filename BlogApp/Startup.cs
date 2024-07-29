@@ -32,6 +32,7 @@ namespace BlogApp
         {
             services.AddServices(); 
             services.AddControllersWithViews();
+            services.AddSession();
             services.AddMvc(config =>
             {
                 var policy = new AuthorizationPolicyBuilder()

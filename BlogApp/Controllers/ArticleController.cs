@@ -1,8 +1,10 @@
 ﻿using Business.Abstract;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BlogApp.Controllers
 {
+    [AllowAnonymous]
     public class ArticleController : Controller
     {
         IArticleService _articleService;

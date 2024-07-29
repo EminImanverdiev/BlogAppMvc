@@ -32,7 +32,10 @@ namespace Business.Concrete
 		{
 			return _articleDal.GetAll(a=>a.ArticleId==Id);
 		}
-
+		public List<Article> GetLastThreeBlogs()
+		{
+			return _articleDal.GetAll().Take(3).ToList();
+		}
 		public List<Article> GetArticlesByWriter(int Id)
 		{
 			return _articleDal.GetAll(a=>a.WriterId==Id);

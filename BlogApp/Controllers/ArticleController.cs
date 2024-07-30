@@ -78,5 +78,29 @@ namespace BlogApp.Controllers
             _articleService.Remove(result);
             return RedirectToAction("ArticleListByWriter");
         }
+       
+        [HttpGet]
+        public IActionResult Edit(int Id)
+        {
+            List<SelectListItem> categoryValues = _categoryService.GetAll()
+                .Select(x => new SelectListItem
+                {
+                    Text = x.CategoryName,
+                    Value = x.CategoryId.ToString()
+                }).ToList();
+            ViewBag.CV = categoryValues;
+
+            var result =_articleService.GetArticleById(Id);
+            return View(result);
+        }
+        [HttpPost]
+        public IActionResult Edit(Article article)
+        {
+            article.ArticleId = 1;
+            article.ArticleStatus = true;
+            article.ArticleCreateDate = DateTime.Parse(DateTime.UtcNow.ToShortDateString());
+            _articleService.Update(article);
+            return RedirectToAction("ArticleListByWriter");
+        }
     }
 }

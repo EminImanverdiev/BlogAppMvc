@@ -1,0 +1,30 @@
+﻿@model Entities.Concrete.Article
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/WriterLayout.cshtml";
+}
+
+<h1>Bloguvu Yenile</h1>
+@using (Html.BeginForm("Edit", "Article", FormMethod.Post))
+{
+    @Html.Label("Article Id")
+    @Html.TextBoxFor(x=>x.ArticleId,new{@class="form-control"})
+    <br/>
+    @Html.Label("Article Basliq")
+    @Html.TextBoxFor(x=>x.ArticleTitle,new{@class="form-control"})
+    <br />
+    @Html.Label("Article Thumbnail Url")
+    @Html.TextBoxFor(x=>x.ArticleThumbnailImage,new{@class="form-control"})
+    <br />
+    @Html.Label("Article image")
+    @Html.TextBoxFor(x=>x.ArticleImage,new{@class="form-control"})
+    <br />
+    @Html.Label("Article category")
+    @Html.DropDownListFor(x=>x.CategoryId,(List<SelectListItem>)ViewBag.CV,new{@class="form-control"})
+    <br />
+    @Html.Label("Article content")
+    @Html.TextAreaFor(x=>x.ArticleContent,3,10,new{@class="form-control"})
+    <br />
+    <button class="btn btn-success">Yenile</button>
+}
+

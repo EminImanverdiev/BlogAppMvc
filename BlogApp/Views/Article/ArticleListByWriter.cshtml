@@ -28,10 +28,10 @@
                 <td>@item.Category.CategoryName</td>
                 <td>@(item.ArticleStatus ? "aktiv" : "passiv")</td>
                 <td><a href="/Article/Delete/@item.ArticleId" class="btn btn-danger">Sil</a></td>
-                <td><a href="#" class="btn btn-warning">Yenile</a></td>
+                <td><a href="/Article/Edit/@item.ArticleId" class="btn btn-warning">Yenile</a></td>
             </tr>
         }
       </tbody>
 </table>
-<a href="#" class="btn btn-primary">Yeni Blog ELave et</a>
+<a href="/Article/Add" class="btn btn-primary">Yeni Blog ELave et</a>
 

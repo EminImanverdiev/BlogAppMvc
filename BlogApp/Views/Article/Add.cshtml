@@ -1,0 +1,31 @@
+﻿@model Entities.Concrete.Article
+@{
+    ViewData["Title"] = "Add";
+    Layout = "~/Views/Shared/WriterLayout.cshtml";
+}
+
+<h1>Yeni Blog daxil edin</h1>
+@using (Html.BeginForm("Add", "Article", FormMethod.Post))
+{
+    @Html.Label("Blog basliqi")
+    @Html.TextBoxFor(x=>x.ArticleTitle,new{@class="form-control"})
+    @Html.ValidationMessageFor(x=>x.ArticleTitle)
+    <br/>
+    @Html.Label("Blog Sekili")
+    @Html.TextBoxFor(x=>x.ArticleImage,new{@class="form-control"})
+    @Html.ValidationMessageFor(x=>x.ArticleImage)
+    <br />
+    @Html.Label("Blog kicik sekil")
+    @Html.TextBoxFor(x=>x.ArticleThumbnailImage,new{@class="form-control"})
+    <br />
+    @Html.Label("Blog kategoryId")
+    @Html.TextBoxFor(x=>x.CategoryId,new{@class="form-control"})
+    <br />
+    @Html.Label("Blog mezmunu")
+    @Html.TextAreaFor(x=>x.ArticleContent,15,3,new{@class="form-control"})
+    @Html.ValidationMessageFor(x=>x.ArticleContent)
+    <br />
+    <button class="btn btn-info">Elave et</button>
+
+}
+

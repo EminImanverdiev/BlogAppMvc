@@ -18,9 +18,29 @@ namespace Business.Concrete
 			_aboutDal = aboutDal;
 		}
 
-		public List<About> GetAll()
+        public void Add(About entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<About> GetAll()
 		{
 			return _aboutDal.GetAll();
 		}
-	}
+
+        public About GetById(int Id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Remove(About entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Update(About entity)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

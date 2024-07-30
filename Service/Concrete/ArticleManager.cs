@@ -20,10 +20,10 @@ namespace Business.Concrete
 
 		public void Add(Article article)
 		{
-			throw new NotImplementedException();
-		}
+            _articleDal.Add(article);
+        }
 
-		public List<Article> GetAll()
+        public List<Article> GetAll()
 		{
 			return _articleDal.GetAll();	
 		}
@@ -53,12 +53,12 @@ namespace Business.Concrete
 
 		public void Remove(Article article)
 		{
-			throw new NotImplementedException();
+			_articleDal.Delete(article);
 		}
 
 		public void Update(Article article)
 		{
-			throw new NotImplementedException();
-		}
-	}
+            _articleDal.Update(article);
+        }
+    }
 }

@@ -27,7 +27,7 @@
                 <td>@(((DateTime)@item.ArticleCreateDate).ToString("dd-MMM-yyyy"))</td>
                 <td>@item.Category.CategoryName</td>
                 <td>@(item.ArticleStatus ? "aktiv" : "passiv")</td>
-                <td><a href="#" class="btn btn-danger">Sil</a></td>
+                <td><a href="/Article/Delete/@item.ArticleId" class="btn btn-danger">Sil</a></td>
                 <td><a href="#" class="btn btn-warning">Yenile</a></td>
             </tr>
         }

@@ -71,5 +71,12 @@ namespace BlogApp.Controllers
             }
             return View();
         }
+        [HttpDelete]
+        public IActionResult Delete(int Id)
+        {
+            var result=_articleService.GetById(Id);
+            _articleService.Remove(result);
+            return RedirectToAction("ArticleListByWriter");
+        }
     }
 }

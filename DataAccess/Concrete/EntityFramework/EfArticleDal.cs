@@ -15,5 +15,11 @@ namespace DataAccess.Concrete.EntityFramework
 			using var context = new AppDbContext();
 			return context.Articles.Include(c => c.Category).ToList();
 		}
-	}
+
+        public List<Article> GetAllWithCategoryByWriter(int Id)
+        {
+            using var context = new AppDbContext();
+			return context.Articles.Include(c=>c.Category).Where(x=>x.WriterId==Id).ToList();
+        }
+    }
 }

@@ -34,7 +34,7 @@ namespace BlogApp.Controllers
             return View(result);
         }
         public IActionResult ArticleListByWriter() {
-           var result=_articleService.GetArticlesByWriter(2);
+           var result=_articleService.GetArticlesWithCategoryByWriter(2);
             return View(result);  
         }
         [HttpGet]

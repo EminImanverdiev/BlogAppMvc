@@ -14,6 +14,7 @@ namespace Business.Abstract
 		List<Article> GetArticlesByWriter(int Id);
 		List<Article> GetArticleById(int Id);
 		List<Article> GetLastThreeBlogs();
+		List<Article> GetArticlesWithCategoryByWriter(int Id);
 
-	}
+    }
 }

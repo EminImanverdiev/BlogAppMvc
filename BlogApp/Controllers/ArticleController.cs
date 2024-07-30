@@ -4,7 +4,10 @@ using Entities.Concrete;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace BlogApp.Controllers
 {
@@ -12,13 +15,15 @@ namespace BlogApp.Controllers
     public class ArticleController : Controller
     {
         IArticleService _articleService;
+        ICategoryService _categoryService;
 
-		public ArticleController(IArticleService articleService)
-		{
-			_articleService = articleService;
-		}
+        public ArticleController(IArticleService articleService, ICategoryService categoryService = null)
+        {
+            _articleService = articleService;
+            _categoryService = categoryService;
+        }
 
-		public IActionResult Index()
+        public IActionResult Index()
         {
             var result=_articleService.GetArticlesWithCategory();
             return View(result);
@@ -35,6 +40,13 @@ namespace BlogApp.Controllers
         [HttpGet]
         public IActionResult Add()
         {
+            List<SelectListItem> categoryValues = _categoryService.GetAll()
+                .Select(x => new SelectListItem
+                {
+                    Text = x.CategoryName, 
+                    Value = x.CategoryId.ToString() 
+                }).ToList();
+            ViewBag.CV= categoryValues;
             return View();
         }
         [HttpPost]

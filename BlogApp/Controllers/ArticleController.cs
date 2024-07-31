@@ -43,14 +43,15 @@ namespace BlogApp.Controllers
             List<SelectListItem> categoryValues = _categoryService.GetAll()
                 .Select(x => new SelectListItem
                 {
-                    Text = x.CategoryName, 
-                    Value = x.CategoryId.ToString() 
+                    Text = x.CategoryName,
+                    Value = x.CategoryId.ToString()
                 }).ToList();
-            ViewBag.CV= categoryValues;
+            ViewBag.CV = categoryValues;
             return View();
         }
+
         [HttpPost]
-        public IActionResult Add(Article article) 
+        public IActionResult Add(Article article)
         {
             ArticleValidator validator = new ArticleValidator();
             ValidationResult results = validator.Validate(article);
@@ -58,7 +59,7 @@ namespace BlogApp.Controllers
             {
                 article.ArticleStatus = true;
                 article.ArticleCreateDate = DateTime.Parse(DateTime.UtcNow.ToShortDateString());
-                article.ArticleId = 1;
+                article.WriterId = 2;
                 _articleService.Add(article);
                 return RedirectToAction("ArticleListByWriter", "Article");
             }
@@ -68,39 +69,54 @@ namespace BlogApp.Controllers
                 {
                     ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
                 }
+                List<SelectListItem> categoryValues = _categoryService.GetAll()
+                    .Select(x => new SelectListItem
+                    {
+                        Text = x.CategoryName,
+                        Value = x.CategoryId.ToString()
+                    }).ToList();
+                ViewBag.CV = categoryValues;
             }
             return View();
         }
+
         [HttpDelete]
+
+
         public IActionResult Delete(int Id)
         {
             var result=_articleService.GetById(Id);
             _articleService.Remove(result);
-            return RedirectToAction("ArticleListByWriter");
+            return RedirectToAction("ArticleListByWriter", "Article");
         }
-       
+
         [HttpGet]
         public IActionResult Edit(int Id)
         {
-            List<SelectListItem> categoryValues = _categoryService.GetAll()
-                .Select(x => new SelectListItem
-                {
-                    Text = x.CategoryName,
-                    Value = x.CategoryId.ToString()
-                }).ToList();
-            ViewBag.CV = categoryValues;
+            //List<SelectListItem> categoryValues = _categoryService.GetAll()
+            //    .Select(x => new SelectListItem
+            //    {
+            //        Text = x.CategoryName,
+            //        Value = x.CategoryId.ToString()
+            //    }).ToList();
+            //ViewBag.CV = categoryValues;
 
-            var result =_articleService.GetArticleById(Id);
-            return View(result);
+            var result = _articleService.GetArticleById(Id);
+            //if (result == null)
+            //{
+            //    return NotFound();
+            //}
+            return View(result); 
         }
-        [HttpPost]
-        public IActionResult Edit(Article article)
-        {
-            article.ArticleId = 1;
-            article.ArticleStatus = true;
-            article.ArticleCreateDate = DateTime.Parse(DateTime.UtcNow.ToShortDateString());
-            _articleService.Update(article);
-            return RedirectToAction("ArticleListByWriter");
-        }
+
+        //[HttpPost]
+        //public IActionResult Edit(Article article)
+        //{
+        //    article.WriterId = 2;
+        //    article.ArticleStatus = true;
+        //    article.ArticleCreateDate = DateTime.Parse(DateTime.UtcNow.ToShortDateString());
+        //    _articleService.Update(article);
+        //    return RedirectToAction("ArticleListByWriter");
+        //}
     }
 }

@@ -1,11 +1,11 @@
-﻿@* @model Entities.Concrete.Article
- *@@{
+﻿ @model Entities.Concrete.Article
+@{
     ViewData["Title"] = "Edit";
     Layout = "~/Views/Shared/WriterLayout.cshtml";
 }
 
 <h1>Bloguvu Yenile</h1>
-@* @using (Html.BeginForm("Edit", "Article", FormMethod.Post))
+@using (Html.BeginForm("Edit", "Article", FormMethod.Post))
 {
     
     <br />
@@ -26,4 +26,4 @@
     <br />
     <button class="btn btn-success">Yenile</button>
 }
- *@
+

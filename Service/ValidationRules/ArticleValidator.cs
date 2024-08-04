@@ -1,4 +1,4 @@
-﻿using Entities.Concrete;
+﻿    using Entities.Concrete;
 using FluentValidation;
 using System;
 using System.Collections.Generic;
@@ -12,7 +12,7 @@ namespace Business.ValidationRules
     {
         public ArticleValidator()
         {
-            RuleFor(a=>a.ArticleTitle).NotEmpty().WithMessage("Blog basliqi bos ola bilmez").MaximumLength(150).WithMessage("xahis edirem 150-den az xarakter daxil edin");
+            RuleFor(a => a.ArticleTitle).NotEmpty().WithMessage("Blog basliqi bos ola bilmez");
             RuleFor(a=>a.ArticleContent).NotEmpty().WithMessage("Blog mezmunun bos ola bilmez");
             RuleFor(a=>a.ArticleImage).NotEmpty().WithMessage("Blog sekili bos ola bilmez");
         }

@@ -3,26 +3,38 @@
 
 <div class="tech-btm">
 	<h3>Latest Posts</h3>
-	@foreach (var item in Model)
-	{
-	<div class="blog-grids row mb-3">
-		<div class="col-md-5 blog-grid-left">
-				<a href="/Article/ArticleDetail/@item.ArticleId">
-				<img src="@item.ArticleImage" class="card-img-top img-fluid" alt="">
-			</a>
-		</div>
-		<div class="col-md-7 blog-grid-right">
-
-			<h5>
-					<a href="/Article/ArticleDetail/@item.ArticleId">@item.ArticleContent.Substring(0,item.ArticleContent.Substring(0,50).LastIndexOf(" ")) ...</a>
-			</h5>
-			<div class="sub-meta">
-				<span>
-						<i class="far fa-clock"></i> @(((DateTime)@item.ArticleCreateDate).ToString("dd-MMM-yyyy"))
-				</span>
-			</div>
-		</div>
-	</div>
-		}
+    @foreach (var item in Model)
+    {
+        <div class="blog-grids row mb-3">
+            <div class="col-md-5 blog-grid-left">
+                <a href="/Article/ArticleDetail/@item.ArticleId">
+                    <img src="@item.ArticleImage" class="card-img-top img-fluid" alt="">
+                </a>
+            </div>
+            <div class="col-md-7 blog-grid-right">
+                <h5>
+                    @if (item.ArticleContent.Length > 50)
+                    {
+                        var previewContent = item.ArticleContent.Substring(0, 50);
+                        var lastSpaceIndex = previewContent.LastIndexOf(" ");
+                        if (lastSpaceIndex != -1)
+                        {
+                            previewContent = previewContent.Substring(0, lastSpaceIndex);
+                        }
+                        @:<a href="/Article/ArticleDetail/@item.ArticleId">@previewContent ...</a>
+                    }
+                    else
+                    {
+                        @:<a href="/Article/ArticleDetail/@item.ArticleId">@item.ArticleContent ...</a>
+                    }
+                </h5>
+                <div class="sub-meta">
+                    <span>
+                        <i class="far fa-clock"></i> @(((DateTime)@item.ArticleCreateDate).ToString("dd-MMM-yyyy"))
+                    </span>
+                </div>
+            </div>
+        </div>
+    }
 
 </div>

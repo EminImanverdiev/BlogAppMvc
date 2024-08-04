@@ -15,4 +15,31 @@
     <ProjectReference Include="..\Service\Business.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\writer\assets\css\" />
+    <Folder Include="wwwroot\writer\assets\fonts\Ubuntu\" />
+    <Folder Include="wwwroot\writer\assets\images\dashboard\" />
+    <Folder Include="wwwroot\writer\assets\images\faces-clipart\" />
+    <Folder Include="wwwroot\writer\assets\images\faces\" />
+    <Folder Include="wwwroot\writer\assets\images\sprites\" />
+    <Folder Include="wwwroot\writer\assets\js\" />
+    <Folder Include="wwwroot\writer\assets\scss\components\" />
+    <Folder Include="wwwroot\writer\assets\scss\landing-screens\" />
+    <Folder Include="wwwroot\writer\assets\scss\mixins\" />
+    <Folder Include="wwwroot\writer\assets\vendors\chart.js\" />
+    <Folder Include="wwwroot\writer\assets\vendors\css\" />
+    <Folder Include="wwwroot\writer\assets\vendors\js\" />
+    <Folder Include="wwwroot\writer\assets\vendors\mdi\css\" />
+    <Folder Include="wwwroot\writer\assets\vendors\mdi\fonts\" />
+    <Folder Include="wwwroot\writer\gulp-tasks\" />
+    <Folder Include="wwwroot\writer\pages\charts\" />
+    <Folder Include="wwwroot\writer\pages\forms\" />
+    <Folder Include="wwwroot\writer\pages\icons\" />
+    <Folder Include="wwwroot\writer\pages\samples\" />
+    <Folder Include="wwwroot\writer\pages\tables\" />
+    <Folder Include="wwwroot\writer\pages\ui-features\" />
+    <Folder Include="wwwroot\writer\partials\" />
+    <Folder Include="wwwroot\writer\PSD\" />
+  </ItemGroup>
+
 </Project>

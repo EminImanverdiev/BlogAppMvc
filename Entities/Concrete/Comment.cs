@@ -14,6 +14,7 @@ namespace Entities.Concrete
         public DateTime CommentDate { get; set; }
         public bool CommentStatus { get; set; }
         public int ArticleId { get; set; }
+        public int ArticleScore { get; set; }
         public Article Article { get; set; }
     }
 }

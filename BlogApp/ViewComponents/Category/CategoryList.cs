@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BlogApp.ViewComponents.Category
 {
-	public class CategoryList:ViewComponent
+    public class CategoryList:ViewComponent
 	{
 		ICategoryService _categoryService;
 

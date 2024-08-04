@@ -80,9 +80,6 @@ namespace BlogApp.Controllers
             return View();
         }
 
-        [HttpDelete]
-
-
         public IActionResult Delete(int Id)
         {
             var result=_articleService.GetById(Id);
@@ -93,30 +90,30 @@ namespace BlogApp.Controllers
         [HttpGet]
         public IActionResult Edit(int Id)
         {
-            //List<SelectListItem> categoryValues = _categoryService.GetAll()
-            //    .Select(x => new SelectListItem
-            //    {
-            //        Text = x.CategoryName,
-            //        Value = x.CategoryId.ToString()
-            //    }).ToList();
-            //ViewBag.CV = categoryValues;
+            List<SelectListItem> categoryValues = _categoryService.GetAll()
+                .Select(x => new SelectListItem
+                {
+                    Text = x.CategoryName,
+                    Value = x.CategoryId.ToString()
+                }).ToList();
+            ViewBag.CV = categoryValues;
 
-            var result = _articleService.GetArticleById(Id);
-            //if (result == null)
-            //{
-            //    return NotFound();
-            //}
+            var result = _articleService.GetById(Id);
+            if (result == null)
+            {
+                return NotFound();
+            }
             return View(result); 
         }
 
-        //[HttpPost]
-        //public IActionResult Edit(Article article)
-        //{
-        //    article.WriterId = 2;
-        //    article.ArticleStatus = true;
-        //    article.ArticleCreateDate = DateTime.Parse(DateTime.UtcNow.ToShortDateString());
-        //    _articleService.Update(article);
-        //    return RedirectToAction("ArticleListByWriter");
-        //}
+        [HttpPost]
+        public IActionResult Edit(Article article)
+        {
+            article.WriterId = 2;
+            article.ArticleStatus = true;
+            article.ArticleCreateDate = DateTime.Parse(DateTime.UtcNow.ToShortDateString());
+            _articleService.Update(article);
+            return RedirectToAction("ArticleListByWriter");
+        }
     }
 }

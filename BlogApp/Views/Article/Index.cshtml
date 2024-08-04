@@ -1,55 +1,59 @@
 ﻿@using Entities.Concrete;
 @model List<Article>
 
-
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/UserLayout.cshtml";
 }
 
 <section class="main-content-w3layouts-agileits">
-	<div class="container">
-		<h3 class="tittle">Blog Posts</h3>
-		<div class="inner-sec">
-			<div class="left-blog-info-w3layouts-agileits text-left">
-				<div class="row">
-					@foreach (var item in Model)
-					{
-						<div class="col-lg-4 card">
-							<a href="single.html">
-								<img src="@item.ArticleImage" class="card-img-top img-fluid" alt="">
-							</a>
-							<div class="card-body">
-								<ul class="blog-icons my-4">
-									<li>
-										<a href="#">
-											<i class="far fa-calendar-alt"></i> @(((DateTime)@item.ArticleCreateDate).ToString("dd-MMM-yyyy"))
-										</a>
-									</li>
-									<li class="mx-2">
-										<a href="#">
-											<i class="far fa-comment"></i> 0
-										</a>
-									</li>
-									<li>
-										<a href="#">
-											<i class="fas fa-eye"></i> @item.Category.CategoryName
-										</a>
-									</li>
-
-								</ul>
-								<h5 class="card-title">
-									<a href="/Article/ArticleDetail/@item.ArticleId">@item.ArticleTitle</a>
-								</h5>
-								<p class="card-text mb-3">@item.ArticleContent.Substring(0,item.ArticleContent.Substring(0,120).LastIndexOf(" ")) ... </p>
-								<a href="/Article/ArticleDetail/@item.ArticleId" class="btn btn-primary read-m">Davamini oxu</a>
-							</div>
-						</div>
-					}
-				</div>
-			</div>
-		</div>
-	</div>
+    <div class="container">
+        <h3 class="tittle">Blog Posts</h3>
+        <div class="inner-sec">
+            <div class="left-blog-info-w3layouts-agileits text-left">
+                <div class="row">
+                    @foreach (var item in Model)
+                    {
+                        <div class="col-lg-4 card">
+                            <a href="single.html">
+                                <img src="@item.ArticleImage" class="card-img-top img-fluid" alt="">
+                            </a>
+                            <div class="card-body">
+                                <ul class="blog-icons my-4">
+                                    <li>
+                                        <a href="#">
+                                            <i class="far fa-calendar-alt"></i> @(((DateTime)@item.ArticleCreateDate).ToString("dd-MMM-yyyy"))
+                                        </a>
+                                    </li>
+                                    <li class="mx-2">
+                                        <a href="#">
+                                            <i class="far fa-comment"></i> 0
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="fas fa-eye"></i> @item.Category.CategoryName
+                                        </a>
+                                    </li>
+                                </ul>
+                                <h5 class="card-title">
+                                    <a href="/Article/ArticleDetail/@item.ArticleId">@item.ArticleTitle</a>
+                                </h5>
+                                @{
+                                    var previewContent = item.ArticleContent.Length > 120 ? item.ArticleContent.Substring(0, 120) : item.ArticleContent;
+                                    var lastSpaceIndex = previewContent.LastIndexOf(" ");
+                                    if (lastSpaceIndex != -1)
+                                    {
+                                        previewContent = previewContent.Substring(0, lastSpaceIndex);
+                                    }
+                                }
+                                <p class="card-text mb-3">@previewContent ... </p>
+                                <a href="/Article/ArticleDetail/@item.ArticleId" class="btn btn-primary read-m">Davamini oxu</a>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
-
-

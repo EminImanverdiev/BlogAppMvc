@@ -2,6 +2,7 @@
 
 namespace Business.Abstract
 {
+
     public interface INotificationService : IGenericService<Notification>
     {
 

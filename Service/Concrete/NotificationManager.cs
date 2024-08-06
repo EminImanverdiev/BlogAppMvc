@@ -25,7 +25,7 @@ namespace Business.Concrete
 
         public List<Notification> GetAll()
         {
-            throw new NotImplementedException();
+            return _notificationDal.GetAll();
         }
 
         public Notification GetById(int Id)

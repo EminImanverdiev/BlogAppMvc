@@ -25,6 +25,8 @@ namespace BlogApp
 			services.AddScoped<IAboutService, AboutManager>();
 			services.AddScoped<IContactDal, EfContactDal>();
 			services.AddScoped<IContactService, ContactManager>();
-		}
+            services.AddScoped<INotificationDal, EfNotificationDal>();
+            services.AddScoped<INotificationService, NotificationManager>();
+        }
     }
 }

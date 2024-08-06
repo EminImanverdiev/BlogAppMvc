@@ -1,10 +1,13 @@
-﻿using Business.Abstract;
+﻿using BlogApp.Models;
+using Business.Abstract;
 using Business.ValidationRules;
 using Entities.Concrete;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using System;
+using System.IO;
 
 namespace BlogApp.Controllers
 {
@@ -19,11 +22,6 @@ namespace BlogApp.Controllers
         }
 
         public IActionResult Index()
-		{
-			return View();
-		}
-		[AllowAnonymous]
-		public IActionResult Test()
 		{
 			return View();
 		}
@@ -62,6 +60,34 @@ namespace BlogApp.Controllers
                 }
             }
             return View();
+        }
+        [AllowAnonymous]
+        [HttpGet]
+        public IActionResult Add()
+        {
+            return View();
+        }
+        [AllowAnonymous]
+        [HttpPost]
+        public IActionResult Add(AddProfileImage writer)
+        {
+            Writer w = new Writer();
+            if (writer.WriterImage!=null)
+            {
+                var extension = Path.GetExtension(writer.WriterImage.FileName);
+                var newimagename=Guid.NewGuid()+extension;
+                var location = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/WriterImageFiles/",newimagename);
+                var stream= new FileStream(location,FileMode.Create);
+                writer.WriterImage.CopyTo(stream);
+                w.WriterImage = newimagename;
+            }
+            w.WriterEmail= writer.WriterEmail;
+            w.WriterPassword= writer.WriterPassword;
+            w.WriterName= writer.WriterName;
+            w.WriterStatus= writer.WriterStatus;
+            w.WriterAbout= writer.WriterAbout;
+            _writerService.Add(w);
+            return RedirectToAction("Index","Dashboard");
         }
     }
 }

@@ -1,0 +1,50 @@
+﻿@model BlogApp.Models.AddProfileImage
+@{
+    ViewData["Title"] = "Add";
+    Layout = "~/Views/Shared/WriterLayout.cshtml";
+}
+
+<form class="form-group" method="post" enctype="multipart/form-data">
+    <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Yazar profilinin duzenlenmesi</h4>
+                @Html.HiddenFor(x=>x.WriterId,new{@class="form-control"})
+                <br />
+                <div class="forms-sample">
+                    <div class="form-group">
+                        <label for="exampleInputName1">Name</label>
+                        @Html.TextBoxFor(x=>x.WriterName,new{@class="form-control"})
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail3">Email address</label>
+                        @Html.TextBoxFor(x=>x.WriterEmail,new{@class="form-control"})
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword4">Password</label>
+                        @Html.TextBoxFor(x=>x.WriterPassword,new{@class="form-control"})
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleSelectGender">Gender</label>
+                        <select class="form-control" id="exampleSelectGender">
+                            <option>Male</option>
+                            <option>Female</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>File upload</label>
+                        <input type="file" name="WriterImage"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleTextarea1">haqqinda</label>
+                        @Html.TextAreaFor(x=>x.WriterAbout,10,3,new{@class="form-control"})
+                    </div>
+                    <button type="submit" class="btn btn-gradient-primary mr-2">Elave et</button>
+                    <button class="btn btn-light">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>
+

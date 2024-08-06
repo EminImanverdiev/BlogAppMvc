@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="wwwroot\WriterImageFiles\" />
     <Folder Include="wwwroot\writer\assets\css\" />
     <Folder Include="wwwroot\writer\assets\fonts\Ubuntu\" />
     <Folder Include="wwwroot\writer\assets\images\dashboard\" />

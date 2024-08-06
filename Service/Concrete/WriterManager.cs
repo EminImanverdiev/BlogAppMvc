@@ -25,12 +25,12 @@ namespace Business.Concrete
 
         public List<Writer> GetAll()
         {
-            throw new NotImplementedException();
+           return _writerDal.GetAll();
         }
 
         public Writer GetById(int Id)
         {
-            throw new NotImplementedException();
+           return _writerDal.Get(w=>w.WriterId==Id);
         }
 
         public List<Writer> GetWriterById(int Id)
@@ -45,7 +45,7 @@ namespace Business.Concrete
 
         public void Update(Writer entity)
         {
-            throw new NotImplementedException();
+            _writerDal.Update(entity);
         }
     }
 }

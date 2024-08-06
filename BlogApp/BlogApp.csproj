@@ -33,7 +33,6 @@
     <Folder Include="wwwroot\writer\assets\vendors\mdi\fonts\" />
     <Folder Include="wwwroot\writer\gulp-tasks\" />
     <Folder Include="wwwroot\writer\pages\charts\" />
-    <Folder Include="wwwroot\writer\pages\forms\" />
     <Folder Include="wwwroot\writer\pages\icons\" />
     <Folder Include="wwwroot\writer\pages\samples\" />
     <Folder Include="wwwroot\writer\pages\tables\" />

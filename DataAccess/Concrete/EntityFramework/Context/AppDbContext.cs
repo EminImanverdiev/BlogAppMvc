@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace DataAccess.Concrete.EntityFramework.Context
@@ -13,6 +14,21 @@ namespace DataAccess.Concrete.EntityFramework.Context
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(@"Server=LAPTOP-S4ROCGFN\SQLEXPRESS01;Database=BlogDb;Trusted_Connection=true");
+
+        }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Entities.Concrete.Match>()
+                .HasOne(x => x.HomeTeam)
+                .WithMany(y=>y.HomeMatches)
+                .HasForeignKey(z=>z.HomeTeamId)
+                .OnDelete(DeleteBehavior.ClientSetNull);
+
+            modelBuilder.Entity<Entities.Concrete.Match>()
+                 .HasOne(x => x.GuestTeam)
+                .WithMany(y => y.AwayMatches)
+                .HasForeignKey(z => z.GuestTeamId)
+                .OnDelete(DeleteBehavior.ClientSetNull);
 
         }
         public DbSet<About> Abouts { get; set; }
@@ -25,6 +41,8 @@ namespace DataAccess.Concrete.EntityFramework.Context
         public DbSet<ArticleRayting> ArticleRaytings { get; set; }
         public DbSet<Notification> Notifications { get; set; }
         public DbSet<Message> Messages { get; set; }
+        public DbSet<Team> Teams { get; set; }
+        public DbSet<Match> Matches { get; set; }
 
     }
 

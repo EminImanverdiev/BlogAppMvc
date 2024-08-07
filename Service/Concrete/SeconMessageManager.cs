@@ -35,7 +35,7 @@ namespace Business.Concrete
 
         public List<SecondMessage> GetInboxListByWriter(int Id)
         {
-            return _secondMessageDal.GetAll(m => m.MessageReceiverId ==Id);
+            return _secondMessageDal.GetAllWithMessageByWriter(Id);
         }
 
         public void Remove(SecondMessage entity)

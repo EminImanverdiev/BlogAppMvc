@@ -30,7 +30,7 @@ namespace Business.Concrete
 
         public SecondMessage GetById(int Id)
         {
-            throw new NotImplementedException();
+            return _secondMessageDal.Get(s=>s.MessageId==Id);
         }
 
         public List<SecondMessage> GetInboxListByWriter(int Id)

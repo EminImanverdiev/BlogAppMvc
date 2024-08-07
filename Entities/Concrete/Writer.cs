@@ -15,6 +15,8 @@ namespace Entities.Concrete
         public string WriterPassword { get; set; }
         public bool WriterStatus { get; set; }
 		public List<Article> Articles { get; set; }
+        public virtual ICollection<SecondMessage> WriterSender { get; set; }
+        public virtual ICollection<SecondMessage> WriterReceiver { get; set; }
 
-	}
+    }
 }

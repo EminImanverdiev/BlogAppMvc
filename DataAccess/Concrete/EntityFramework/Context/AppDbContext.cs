@@ -29,6 +29,16 @@ namespace DataAccess.Concrete.EntityFramework.Context
                 .WithMany(y => y.AwayMatches)
                 .HasForeignKey(z => z.GuestTeamId)
                 .OnDelete(DeleteBehavior.ClientSetNull);
+            modelBuilder.Entity<SecondMessage>()
+              .HasOne(x => x.SenderUser)
+             .WithMany(y => y.WriterSender)
+             .HasForeignKey(z => z.MessageSenderId)
+             .OnDelete(DeleteBehavior.ClientSetNull);
+            modelBuilder.Entity<SecondMessage>()
+           .HasOne(x => x.ReceiverUser)
+          .WithMany(y => y.WriterReceiver)
+          .HasForeignKey(z => z.MessageReceiverId)
+          .OnDelete(DeleteBehavior.ClientSetNull);
 
         }
         public DbSet<About> Abouts { get; set; }
@@ -42,7 +52,8 @@ namespace DataAccess.Concrete.EntityFramework.Context
         public DbSet<Notification> Notifications { get; set; }
         public DbSet<Message> Messages { get; set; }
         public DbSet<Team> Teams { get; set; }
-        public DbSet<Match> Matches { get; set; }
+        public DbSet<SecondMessage> secondMessages { get; set; }
+        public DbSet<Entities.Concrete.Match> Matches { get; set; }
 
     }
 

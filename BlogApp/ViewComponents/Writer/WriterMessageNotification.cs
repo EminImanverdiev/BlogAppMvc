@@ -5,18 +5,17 @@ namespace BlogApp.ViewComponents.Writer
 {
     public class WriterMessageNotification:ViewComponent
     {
-        IMessageService _messageService;
+        ISecondMessageService _messageService;
 
-        public WriterMessageNotification(IMessageService messageService)
+        public WriterMessageNotification(ISecondMessageService messageService)
         {
             _messageService = messageService;
         }
 
         public IViewComponentResult Invoke()
         {
-            string p;
-            p = "dev.studio@mail.az";
-            var result = _messageService.GetInboxListByWriter(p);
+            int Id = 2;
+            var result = _messageService.GetInboxListByWriter(Id);
             return View(result);
         }
     }

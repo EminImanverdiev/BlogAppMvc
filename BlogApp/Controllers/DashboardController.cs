@@ -7,7 +7,6 @@ namespace BlogApp.Controllers
 {
     public class DashboardController : Controller
     {
-        [AllowAnonymous]
         public IActionResult Index()
         {
             using (AppDbContext context=new AppDbContext())

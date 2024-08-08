@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using Business.ValidationRules;
+using DataAccess.Concrete.EntityFramework.Context;
 using Entities.Concrete;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Authorization;
@@ -11,7 +12,6 @@ using System.Linq;
 
 namespace BlogApp.Controllers
 {
-    [AllowAnonymous]
     public class ArticleController : Controller
     {
         IArticleService _articleService;
@@ -34,7 +34,11 @@ namespace BlogApp.Controllers
             return View(result);
         }
         public IActionResult ArticleListByWriter() {
-           var result=_articleService.GetArticlesWithCategoryByWriter(2);
+            var usermail = User.Identity.Name;
+            AppDbContext dbContext = new AppDbContext();
+            var WriterId = dbContext.Writers.Where(x => x.WriterEmail == usermail)
+                .Select(y => y.WriterId).FirstOrDefault();
+            var result=_articleService.GetArticlesWithCategoryByWriter(WriterId);
             return View(result);  
         }
         [HttpGet]
@@ -53,13 +57,17 @@ namespace BlogApp.Controllers
         [HttpPost]
         public IActionResult Add(Article article)
         {
+            var usermail = User.Identity.Name;
+            AppDbContext dbContext = new AppDbContext();
+            var WriterId = dbContext.Writers.Where(x => x.WriterEmail == usermail)
+                .Select(y => y.WriterId).FirstOrDefault();
             ArticleValidator validator = new ArticleValidator();
             ValidationResult results = validator.Validate(article);
             if (results.IsValid)
             {
                 article.ArticleStatus = true;
                 article.ArticleCreateDate = DateTime.Parse(DateTime.UtcNow.ToShortDateString());
-                article.WriterId = 2;
+                article.WriterId = WriterId;
                 _articleService.Add(article);
                 return RedirectToAction("ArticleListByWriter", "Article");
             }
@@ -109,7 +117,11 @@ namespace BlogApp.Controllers
         [HttpPost]
         public IActionResult Edit(Article article)
         {
-            article.WriterId = 2;
+            var usermail = User.Identity.Name;
+            AppDbContext dbContext = new AppDbContext();
+            var WriterId = dbContext.Writers.Where(x => x.WriterEmail == usermail)
+                .Select(y => y.WriterId).FirstOrDefault();
+            article.WriterId = WriterId;
             article.ArticleStatus = true;
             article.ArticleCreateDate = DateTime.Parse(DateTime.UtcNow.ToShortDateString());
             _articleService.Update(article);

@@ -1,17 +1,19 @@
 ﻿using BlogApp.Models;
 using Business.Abstract;
 using Business.ValidationRules;
+using DataAccess.Concrete.EntityFramework.Context;
 using Entities.Concrete;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.IO;
+using System.Linq;
 
 namespace BlogApp.Controllers
 {
-    [AllowAnonymous]
 	public class WriterController : Controller
 	{
         IWriterService _writerService;
@@ -40,7 +42,11 @@ namespace BlogApp.Controllers
         }
         [HttpGet]
         public IActionResult WriterEditProfile() 
-        { 
+        {
+            AppDbContext dbContext = new AppDbContext();
+            var usermail = User.Identity.Name;
+            var WriterId = dbContext.Writers.Where(x => x.WriterEmail == usermail)
+               .Select(y => y.WriterId).FirstOrDefault();
             var result=_writerService.GetById(2);
             return View(result);
         }
@@ -63,13 +69,11 @@ namespace BlogApp.Controllers
             }
             return View();
         }
-        [AllowAnonymous]
         [HttpGet]
         public IActionResult Add()
         {
             return View();
         }
-        [AllowAnonymous]
         [HttpPost]
         public IActionResult Add(AddProfileImage writer)
         {
